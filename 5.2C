@@ -1,0 +1,75 @@
+import time
+import tkinter
+import RPi.GPIO as GPIO
+
+r = tkinter.Tk()
+
+r.title("STOP TRAFFIC LIGHTS AHEAD")
+r.geometry("600x400")
+r.configure(background = "black")
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
+
+red_led = 25
+
+yellow_led = 23
+
+green_led = 14
+
+GPIO.setup(red_led, GPIO.OUT)
+
+GPIO.setup(yellow_led, GPIO.OUT)
+
+GPIO.setup(green_led, GPIO.OUT)
+
+
+def func(): #Red
+    GPIO.output(green_led, 0)
+    GPIO.output(yellow_led, 0)
+    GPIO.output(red_led, 1)
+    
+def func2(): #Green
+    GPIO.output(yellow_led, 0)
+    GPIO.output(green_led, 1)
+    GPIO.output(red_led, 0)
+
+def func1(): #Yellow
+    GPIO.output(red_led, 0)
+    GPIO.output(yellow_led, 1)
+    GPIO.output(green_led, 0)
+
+
+
+
+k = tkinter.Label(r, text="START EARLY", bg = "white", fg = "black" )
+q = tkinter.Label(r, text="DRIVE SLOWLY", bg = "white", fg = "black" )
+v = tkinter.Label(r, text="REACH SAFELY", bg = "white", fg = "black" )
+
+s = tkinter.Label(r, bg = "sky blue")
+
+z = tkinter.Label(r, bg = "sky blue")
+    
+mssg = tkinter.Button(r, text = "STOP", bg = "red", command=func)
+
+z1 = tkinter.Label(r, bg = "sky blue")
+
+mssg1 = tkinter.Button(r, text = "Prepare to Stop", bg = "Yellow", command=func1)
+
+z2 = tkinter.Label(r, bg = "sky blue")
+
+mssg2 = tkinter.Button(r, text = "GO", bg = "green", command=func2)
+
+
+k.pack()
+q.pack()
+v.pack()
+s.pack()
+mssg.pack()
+z.pack()
+mssg1.pack()
+z1.pack()
+mssg2.pack()
+z2.pack()
+
+r.mainloop()
